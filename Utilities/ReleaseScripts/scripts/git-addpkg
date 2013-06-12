@@ -13,6 +13,7 @@ if [ "X$#" == X1 ]; then
   CMSSW_TAG=$CMSSW_VERSION
 else
   CMSSW_TAG=$2
+  CHOOSETAG=true
 fi
 
 PKG_NAME="$1"
@@ -50,4 +51,8 @@ git merge FETCH_HEAD
 git read-tree -mu HEAD
 if [ "X$FIRSTTIME" = Xtrue ]; then
   git reset --hard $CMSSW_TAG
+else
+  if [ "X$CHOOSETAG" = Xtrue ]; then
+    echo 'WARNING: this not the first time you run the addpkg command; the provided tag will be ignored'
+  fi
 fi
