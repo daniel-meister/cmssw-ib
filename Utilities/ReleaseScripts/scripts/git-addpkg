@@ -40,7 +40,7 @@ git config core.sparsecheckout true
 touch $CMSSW_BASE/src/.git/info/sparse-checkout
 cp -f $CMSSW_BASE/src/.git/info/sparse-checkout $CMSSW_BASE/src/.git/info/sparse-checkout-new
 echo $PKG_NAME >> $CMSSW_BASE/src/.git/info/sparse-checkout-new
-cat .git/info/sparse-checkout-new | sort -u > $CMSSW_BASE/src/.git/info/sparse-checkout
+cat .git/info/sparse-checkout-new | sed 's#/\+#/#g;s#^/##;s#\([^/]\)$#\1/#' | sort -u > $CMSSW_BASE/src/.git/info/sparse-checkout
 if [ ! "X$CMSSW_MIRROR" = X ]; then
   git remote set-url cmssw-main-ro $CMSSW_MIRROR
   git fetch --tags $CMSSW_MIRROR
