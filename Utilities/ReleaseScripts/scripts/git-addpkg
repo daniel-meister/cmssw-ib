@@ -46,6 +46,7 @@ if [ ! "X$CMSSW_MIRROR" = X ]; then
   git remote set-url cmssw-main-ro https://github.com/cms-sw/cmssw.git
 fi
 git fetch --tags cmssw-main-ro
+git merge FETCH_HEAD
 git read-tree -mu HEAD
 if [ "X$FIRSTTIME" = Xtrue ]; then
   git reset --hard $CMSSW_TAG
